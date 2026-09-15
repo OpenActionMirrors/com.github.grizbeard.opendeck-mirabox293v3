@@ -16,5 +16,5 @@ Changes relative to the upstream plugin:
 - Key press order changed to row-major from the top left, which on this device is *not*
   the inverse of the image order.
 - Added a keepalive task; this device drops the connection after ~35 s of silence.
-- New plugin icon, UUID (`local.plugins.opendeck-mirabox293v3`) and device namespace
+- New plugin icon, UUID (`com.github.grizbeard.opendeck-mirabox293v3`) and device namespace
   (`93`), so it installs alongside the upstream plugin without conflict.

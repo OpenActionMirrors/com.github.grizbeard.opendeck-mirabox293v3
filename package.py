@@ -11,7 +11,7 @@ import os
 import shutil
 import zipfile
 
-PLUGIN_ID = "local.plugins.opendeck-mirabox293v3.sdPlugin"
+PLUGIN_ID = "com.github.grizbeard.opendeck-mirabox293v3.sdPlugin"
 
 # flag name -> filename inside the plugin folder, which must match manifest.json
 BINARIES = {

@@ -55,7 +55,7 @@ If you see a different product ID, use the upstream plugin. If you see `1006`, r
 <details>
 <summary>Installing by hand instead</summary>
 
-Extract the zip so that the `local.plugins.opendeck-mirabox293v3.sdPlugin` folder inside
+Extract the zip so that the `com.github.grizbeard.opendeck-mirabox293v3.sdPlugin` folder inside
 it lands directly in OpenDeck's `plugins` directory — on Windows that is
 `%APPDATA%\opendeck\plugins\`. Leave the folder name and the binary names exactly as
 they are: OpenDeck resolves both from `manifest.json`.

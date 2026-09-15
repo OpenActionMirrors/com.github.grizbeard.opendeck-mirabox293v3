@@ -1,9 +1,9 @@
 {
   "Name": "Mirabox 293 V3",
   "Description": "Device support plugin for the Mirabox Stream Dock 293 V3 (6603:1006)",
-  "Author": "Based on opendeck-akp153 by Andrey Viktorov",
+  "Author": "Grizbeard",
   "Version": "0.1.0",
-  "PluginUUID": "local.plugins.opendeck-mirabox293v3",
+  "PluginUUID": "com.github.grizbeard.opendeck-mirabox293v3",
   "CodePathLin": "opendeck-mirabox293v3-linux",
   "CodePathMac": "opendeck-mirabox293v3-mac",
   "CodePathWin": "opendeck-mirabox293v3-win.exe",
