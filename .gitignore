@@ -1,2 +1,5 @@
 /target
-*.sdPlugin.zip
+/build
+__pycache__/
+*.pyc
+*.plugin.zip

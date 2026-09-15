@@ -1,0 +1,81 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04   # oldest supported glibc, for the widest compatibility
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release
+      - run: mv target/release/opendeck-mirabox293v3 opendeck-mirabox293v3-linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: opendeck-mirabox293v3-linux
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - run: cargo build --release --target x86_64-pc-windows-msvc
+      - shell: bash
+        run: mv target/x86_64-pc-windows-msvc/release/opendeck-mirabox293v3.exe opendeck-mirabox293v3-win.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: opendeck-mirabox293v3-win.exe
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin,aarch64-apple-darwin
+      - name: Build both architectures and fuse into a universal binary
+        run: |
+          cargo build --release --target x86_64-apple-darwin
+          cargo build --release --target aarch64-apple-darwin
+          lipo -create -output opendeck-mirabox293v3-mac \
+            target/x86_64-apple-darwin/release/opendeck-mirabox293v3 \
+            target/aarch64-apple-darwin/release/opendeck-mirabox293v3
+          lipo -info opendeck-mirabox293v3-mac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos
+          path: opendeck-mirabox293v3-mac
+
+  package:
+    needs: [linux, windows, macos]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Build the plugin zip
+        run: |
+          python3 package.py \
+            --linux artifacts/linux/opendeck-mirabox293v3-linux \
+            --mac artifacts/macos/opendeck-mirabox293v3-mac \
+            --win artifacts/windows/opendeck-mirabox293v3-win.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plugin-zip
+          path: build/opendeck-mirabox293v3.plugin.zip
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/opendeck-mirabox293v3.plugin.zip
+          generate_release_notes: true

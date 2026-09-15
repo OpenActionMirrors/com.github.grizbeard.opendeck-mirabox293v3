@@ -37,42 +37,33 @@ If you see a different product ID, use the upstream plugin. If you see `1006`, r
 
 ## Installation
 
-The plugin directory name and the binary name both matter — OpenDeck resolves them from
-`manifest.json`, so keep them exactly as written.
+1. Download `opendeck-mirabox293v3.plugin.zip` from the
+   [releases page](https://github.com/Grizbeard/opendeck-mirabox293v3/releases). It
+   contains binaries for Windows, Linux and macOS; OpenDeck selects the right one at
+   runtime from `manifest.json`.
+2. In OpenDeck: **Plugins -> Install from file**, and choose the zip.
+3. **Linux only:** install the udev rules, or the plugin will not be able to open the
+   device:
 
-### Windows
-
-1. Build the binary (see [Building](#building)), or download it from the releases page.
-2. Create this folder:
-
+   ```bash
+   sudo cp 40-opendeck-mirabox293v3.rules /etc/udev/rules.d/
+   sudo udevadm control --reload-rules && sudo udevadm trigger
    ```
-   %APPDATA%\opendeck\plugins\local.plugins.opendeck-mirabox293v3.sdPlugin\
-   ```
 
-3. Copy into it:
-   - `manifest.json`
-   - `assets/` (the whole folder)
-   - the built binary, renamed to `opendeck-mirabox293v3-win.exe`
-4. Restart OpenDeck.
+4. Unplug and replug the device, then restart OpenDeck.
 
-### Linux
+<details>
+<summary>Installing by hand instead</summary>
 
-Install the udev rules first, or the plugin will not be able to open the device:
+Extract the zip so that the `local.plugins.opendeck-mirabox293v3.sdPlugin` folder inside
+it lands directly in OpenDeck's `plugins` directory — on Windows that is
+`%APPDATA%\opendeck\plugins\`. Leave the folder name and the binary names exactly as
+they are: OpenDeck resolves both from `manifest.json`.
 
-```bash
-sudo cp 40-opendeck-mirabox293v3.rules /etc/udev/rules.d/
-sudo udevadm control --reload-rules && sudo udevadm trigger
-```
+</details>
 
-Then follow the Windows steps, using `~/.config/opendeck/plugins/` as the plugin
-directory and naming the binary `opendeck-mirabox293v3-linux`.
-
-### macOS
-
-As above, with the binary named `opendeck-mirabox293v3-mac`.
-
-Only the Windows build has been tested on hardware. The Linux and macOS paths are
-inherited from the upstream plugin and are expected to work, but are unverified here.
+Only the Windows build has been tested on hardware. The Linux and macOS binaries are
+built by CI and are expected to work, but are unverified.
 
 ## Building
 
@@ -95,8 +86,19 @@ cargo build --release
 
 The binary lands at `target/release/opendeck-mirabox293v3`.
 
-Rename it as described under [Installation](#installation) and copy it in alongside
-`manifest.json` and `assets/`.
+### Packaging
+
+`package.py` assembles the `.sdPlugin` folder and produces an installable zip. Pass
+whichever binaries you have built:
+
+```bash
+python package.py --win target/x86_64-pc-windows-msvc/release/opendeck-mirabox293v3.exe
+```
+
+A full release zip carries all three platforms. Since that cannot be produced on a single
+machine without cross-compilation, CI does it: pushing a `v*` tag runs
+`.github/workflows/release.yml`, which builds each platform natively — macOS as a
+universal `x86_64` + `arm64` binary — then packages and attaches the zip to the release.
 
 ## Device characteristics
 
