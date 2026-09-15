@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>Mirabox 293 V3</title>
+  <rect x="16" y="51" width="224" height="154" rx="20" fill="#17171C" stroke="#3A3A45" stroke-width="2"/>
+  <rect x="34" y="73" width="32" height="32" rx="6" fill="#22D3EE"/>
+  <rect x="73" y="73" width="32" height="32" rx="6" fill="#44B9F2"/>
+  <rect x="112" y="73" width="32" height="32" rx="6" fill="#66A0F5"/>
+  <rect x="151" y="73" width="32" height="32" rx="6" fill="#8A8AF3"/>
+  <rect x="190" y="73" width="32" height="32" rx="6" fill="#B481DB"/>
+  <rect x="34" y="112" width="32" height="32" rx="6" fill="#3DBFF1"/>
+  <rect x="73" y="112" width="32" height="32" rx="6" fill="#5FA6F4"/>
+  <rect x="112" y="112" width="32" height="32" rx="6" fill="#818CF8"/>
+  <rect x="151" y="112" width="32" height="32" rx="6" fill="#AA83E0"/>
+  <rect x="190" y="112" width="32" height="32" rx="6" fill="#D479C8"/>
+  <rect x="34" y="151" width="32" height="32" rx="6" fill="#57ABF4"/>
+  <rect x="73" y="151" width="32" height="32" rx="6" fill="#7992F7"/>
+  <rect x="112" y="151" width="32" height="32" rx="6" fill="#A185E6"/>
+  <rect x="151" y="151" width="32" height="32" rx="6" fill="#CB7BCE"/>
+  <rect x="190" y="151" width="32" height="32" rx="6" fill="#F472B6"/>
+</svg>

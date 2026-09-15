@@ -1,0 +1,5 @@
+# MiraBox Stream Dock 293 V3 (6603:1006)
+# Install to /etc/udev/rules.d/ then run:
+#   sudo udevadm control --reload-rules && sudo udevadm trigger
+SUBSYSTEM=="usb", ATTRS{idVendor}=="6603", ATTRS{idProduct}=="1006", MODE="0660", TAG+="uaccess"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="6603", ATTRS{idProduct}=="1006", MODE="0660", TAG+="uaccess"

@@ -1,0 +1,19 @@
+{
+  "Name": "Mirabox 293 V3",
+  "Description": "Device support plugin for the Mirabox Stream Dock 293 V3 (6603:1006)",
+  "Author": "Based on opendeck-akp153 by Andrey Viktorov",
+  "Version": "0.1.0",
+  "PluginUUID": "local.plugins.opendeck-mirabox293v3",
+  "CodePathLin": "opendeck-mirabox293v3-linux",
+  "CodePathMac": "opendeck-mirabox293v3-mac",
+  "CodePathWin": "opendeck-mirabox293v3-win.exe",
+  "Icon": "assets/icon",
+  "Category": "Hardware",
+  "OS": [
+    { "Platform": "linux" },
+    { "Platform": "mac", "MinimumVersion": "11.3" },
+    { "Platform": "windows", "MinimumVersion": "10" }
+  ],
+  "Actions": [],
+  "DeviceNamespace": "93"
+}
